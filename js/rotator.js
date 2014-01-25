@@ -69,6 +69,7 @@ window.onload = function() {
       temp.anchor.setTo(0.5,0.5);
       var obj;
       if(value.indexOf("1") !== -1){
+
       	obj={n:false, e:true, s:false, w:true, img: temp};
       }
       else if(value.indexOf("2") !== -1){
@@ -203,9 +204,9 @@ window.onload = function() {
    }
 	function render(sprite) {
 	    game.debug.renderSpriteInfo(sprite, 32, 32);
-	    game.debug.renderText('angularVelocity: ' + sprite.body.angularVelocity, 32, 200);
-	    game.debug.renderText('angularAcceleration: ' + sprite.body.angularAcceleration, 32, 232);
-	    game.debug.renderText('angularDrag: ' + sprite.body.angularDrag, 32, 264);
-	    game.debug.renderText('deltaZ: ' + sprite.body.deltaZ(), 32, 296);
+	    // game.debug.renderText('angularVelocity: ' + sprite.body.angularVelocity, 32, 200);
+	    // game.debug.renderText('angularAcceleration: ' + sprite.body.angularAcceleration, 32, 232);
+	    //game.debug.renderText('angularDrag: ' + sprite.body.angularDrag, 32, 264);
+	    //game.debug.renderText('deltaZ: ' + sprite.body.deltaZ(), 32, 296);
 	}
 }
