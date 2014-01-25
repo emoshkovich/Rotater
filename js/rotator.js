@@ -9,7 +9,7 @@ window.onload = function() {
   	tiles[i] = new Array(6);
   }
   var canMove = true;
-  var x = 0;
+  var timeX = 0;
   
   function preload () {
     loadImages(function() {
@@ -32,12 +32,11 @@ window.onload = function() {
   	// x=d.getUTCSeconds();
   //game.physics.collide(player, sprite2, collisionHandler, null, this);
   if (jump.isDown && canMove){
-  	canMove = false;
+  	//canMove = false;
   	rotate(player.x, player.y);
-  	x = d.getUTCSeconds();
-  	console.log(x);
+  	timeX = d.getUTCSeconds();
   }
-  else if ((d.getUTCSeconds() - x) > 0.5){
+  else if ((d.getUTCSeconds() - timeX) > 0.5){
   	canMove = true;
   }
     player.body.velocity.setTo(0, 0);
@@ -86,8 +85,7 @@ window.onload = function() {
       else{
       	obj={n:true, e:true, s:true, w:true, img: temp};
       }
-     //console.log(i + " " + j + "\n");
-      tiles[i][j] = obj;
+      tiles[j][i] = obj;
       x += 100;
       if (x % 600 === 0) {
         y +=100;
@@ -101,17 +99,115 @@ window.onload = function() {
     });
     callback();
   }
-  function rotate(i, j){
-	tiles[1][1].img.angle += 90;
-    render(tiles[1][1].img);
+  function rotate(x, y){
+  	x = Math.floor((x+50)/100);
+  	y = Math.floor((y+50)/100);
+	console.log(x +" " + y);
+	if (x > 0 && x < 5 && y > 0 && y < 5){
+		tiles[x-1][y-1].img.angle += 90;
+		render(tiles[x-1][y-1].img);
+		tiles[x-1][y].img.angle += 90;
+		render(tiles[x-1][y].img);
+		tiles[x-1][y+1].img.angle += 90;
+		render(tiles[x-1][y+1].img);
+		tiles[x][y-1].img.angle += 90;
+		render(tiles[x][y-1].img);
+		tiles[x][y+1].img.angle += 90;
+		render(tiles[x][y+1].img);
+		tiles[x+1][y-1].img.angle += 90;
+		render(tiles[x+1][y-1].img);
+		tiles[x+1][y].img.angle += 90;
+		render(tiles[x+1][y].img);
+		tiles[x+1][y+1].img.angle += 90;
+		render(tiles[x+1][y+1].img);
 	}
+	else if (x === 0 && y === 0){
+		tiles[x+1][y].img.angle += 90;
+		render(tiles[x+1][y].img);
+		tiles[x+1][y+1].img.angle += 90;
+		render(tiles[x+1][y+1].img);
+		tiles[x][y+1].img.angle += 90;
+		render(tiles[x][y+1].img);
+	}
+	else if (x === 5 && y === 5) {
+		tiles[x-1][y].img.angle += 90;
+		render(tiles[x-1][y].img);
+		tiles[x-1][y-1].img.angle += 90;
+		render(tiles[x-1][y-1].img);
+		tiles[x][y-1].img.angle += 90;
+		render(tiles[x][y-1].img);
+	}
+	else if (x === 5 && y === 0) {
+		tiles[x-1][y].img.angle += 90;
+		render(tiles[x-1][y].img);
+		tiles[x-1][y+1].img.angle += 90;
+		render(tiles[x-1][y+1].img);
+		tiles[x][y+1].img.angle += 90;
+		render(tiles[x][y+1].img);
+	}
+	else if (x === 0 && y === 5) {
+		tiles[x+1][y].img.angle += 90;
+		render(tiles[x+1][y].img);
+		tiles[x+1][y-1].img.angle += 90;
+		render(tiles[x+1][y-1].img);
+		tiles[x][y-1].img.angle += 90;
+		render(tiles[x][y-1].img);
+	}
+	else if (x === 0 && y > 0 && y < 5) {
+		tiles[x][y-1].img.angle += 90;
+		render(tiles[x][y-1].img);
+		tiles[x+1][y-1].img.angle += 90;
+		render(tiles[x+1][y-1].img);
+		tiles[x+1][y].img.angle += 90;
+		render(tiles[x+1][y].img);
+		tiles[x][y+1].img.angle += 90;
+		render(tiles[x][y+1].img);
+		tiles[x+1][y+1].img.angle += 90;
+		render(tiles[x+1][y+1].img);
+	}
+	else if (x === 5 && y > 0 && y < 5) {
+		tiles[x][y-1].img.angle += 90;
+		render(tiles[x][y-1].img);
+		tiles[x-1][y-1].img.angle += 90;
+		render(tiles[x-1][y-1].img);
+		tiles[x-1][y].img.angle += 90;
+		render(tiles[x-1][y].img);
+		tiles[x][y+1].img.angle += 90;
+		render(tiles[x][y+1].img);
+		tiles[x-1][y+1].img.angle += 90;
+		render(tiles[x-1][y+1].img);
+	}
+	else if (y === 0 && x > 0 && x < 5) {
+		tiles[x-1][y].img.angle += 90;
+		render(tiles[x-1][y].img);
+		tiles[x+1][y].img.angle += 90;
+		render(tiles[x+1][y].img);
+		tiles[x-1][y+1].img.angle += 90;
+		render(tiles[x-1][y+1].img);
+		tiles[x][y+1].img.angle += 90;
+		render(tiles[x][y+1].img);
+		tiles[x+1][y+1].img.angle += 90;
+		render(tiles[x+1][y+1].img);
+	}
+	else if (y === 5 && x > 0 && x < 5) {
+		tiles[x-1][y].img.angle += 90;
+		render(tiles[x-1][y].img);
+		tiles[x+1][y].img.angle += 90;
+		render(tiles[x+1][y].img);
+		tiles[x-1][y-1].img.angle += 90;
+		render(tiles[x-1][y-1].img);
+		tiles[x][y-1].img.angle += 90;
+		render(tiles[x][y-1].img);
+		tiles[x+1][y-1].img.angle += 90;
+		render(tiles[x+1][y-1].img);
+	}
+
+   }
 	function render(sprite) {
 	    game.debug.renderSpriteInfo(sprite, 32, 32);
 	    game.debug.renderText('angularVelocity: ' + sprite.body.angularVelocity, 32, 200);
 	    game.debug.renderText('angularAcceleration: ' + sprite.body.angularAcceleration, 32, 232);
 	    game.debug.renderText('angularDrag: ' + sprite.body.angularDrag, 32, 264);
 	    game.debug.renderText('deltaZ: ' + sprite.body.deltaZ(), 32, 296);
-	    stop();
-
 	}
 }
