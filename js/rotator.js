@@ -8,11 +8,14 @@ window.onload = function() {
   for (var i = 0; i<6; i++){
   	tiles[i] = new Array(6);
   }
+  var canMove = true;
+  var x = 0;
   
   function preload () {
     loadImages(function() {
       game.load.image('player', 'img/Phero.png');
       keys = game.input.keyboard.createCursorKeys();
+      jump = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     });
   }
 
@@ -25,8 +28,18 @@ window.onload = function() {
   }
 
   function update() {
+  	var d = new Date();
+  	// x=d.getUTCSeconds();
   //game.physics.collide(player, sprite2, collisionHandler, null, this);
-  
+  if (jump.isDown && canMove){
+  	canMove = false;
+  	rotate(player.x, player.y);
+  	x = d.getUTCSeconds();
+  	console.log(x);
+  }
+  else if ((d.getUTCSeconds() - x) > 0.5){
+  	canMove = true;
+  }
     player.body.velocity.setTo(0, 0);
     if (keys.right.isDown){
       player.body.velocity.x = 200;
@@ -55,7 +68,8 @@ window.onload = function() {
     var i =0;
     var j=0;
     $.each(json, function(key, value) {
-      var temp = game.add.sprite(x, y, key);
+      var temp = game.add.sprite(x+50, y+50, key);
+      temp.anchor.setTo(0.5,0.5);
       var obj;
       if(value.indexOf("1") !== -1){
       	obj={n:false, e:true, s:false, w:true, img: temp};
@@ -85,7 +99,19 @@ window.onload = function() {
       }
       j++;
     });
-    console.log(tiles[5][5].n);
     callback();
   }
+  function rotate(i, j){
+	tiles[1][1].img.angle += 90;
+    render(tiles[1][1].img);
+	}
+	function render(sprite) {
+	    game.debug.renderSpriteInfo(sprite, 32, 32);
+	    game.debug.renderText('angularVelocity: ' + sprite.body.angularVelocity, 32, 200);
+	    game.debug.renderText('angularAcceleration: ' + sprite.body.angularAcceleration, 32, 232);
+	    game.debug.renderText('angularDrag: ' + sprite.body.angularDrag, 32, 264);
+	    game.debug.renderText('deltaZ: ' + sprite.body.deltaZ(), 32, 296);
+	    stop();
+
+	}
 }
