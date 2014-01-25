@@ -1,12 +1,10 @@
 window.onload = function() {
 
   var game = new Phaser.Game(600, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-  var player;
+  var player, keys, henry, startScreen, arrow;
   var keys;
   var json = { "ps1": "img/Ps1.png", "ps2": "img/Ps2.png", "ps3": "img/Ps3.png", "ps4": "img/Ps4.png", "ps5": "img/Ps1.png", "ps6": "img/Ps2.png", "ps7": "img/Ps3.png", "ps8": "img/Ps4.png", "ps9": "img/Ps1.png", "ps10": "img/Ps2.png", "ps11": "img/Ps3.png", "ps12": "img/Ps4.png", "ps13": "img/Ps1.png", "ps14": "img/Ps2.png", "ps15": "img/Ps3.png", "ps16": "img/Ps4.png", "ps17": "img/Ps1.png", "ps18": "img/Ps2.png", "ps19": "img/Ps3.png", "ps20": "img/Ps3.png", "ps21": "img/Ps1.png", "ps22": "img/Ps2.png", "ps23": "img/Ps3.png", "ps24": "img/Ps4.png", "ps25": "img/Ps1.png", "ps26": "img/Ps2.png", "ps27": "img/Ps3.png", "ps28": "img/Ps4.png", "ps29": "img/Ps1.png", "ps30": "img/Ps2.png", "ps31": "img/Ps3.png", "ps32": "img/Ps4.png", "ps33": "img/Ps1.png", "ps34": "img/Ps2.png", "ps35": "img/Ps3.png", "ps36": "img/Ps4.png" };
   var tiles = new Array(6);
-  var henry;
-  var startScreen;
   for (var i = 0; i<6; i++){
   	tiles[i] = new Array(6);
   }
@@ -17,6 +15,7 @@ window.onload = function() {
     loadImages(function() {
       game.load.image('bg', 'img/background.png');
       game.load.image('player', 'img/Phero.png');
+      game.load.image('arrow', 'img/arrow.png');
       game.load.spritesheet('henrywalk', 'img/henrywalk.png', 40, 40, 18);
       game.load.image('startScreen', 'img/introscreen.png');
       game.load.image('endScreen', 'img/endscreen.png');
@@ -32,6 +31,8 @@ window.onload = function() {
       endScreen = game.add.tileSprite(0, 0, 600, 600, 'endScreen');
       endScreen.visible = false;
       player = game.add.sprite(50, 50, 'henrywalk');
+      arrow = game.add.sprite(520, 535, 'arrow');
+      arrow.visible = false;
       player.anchor.setTo(.5, .5);
       player.body.setSize(100, 100, 0, 0);
       player.animations.add('walk');
@@ -43,9 +44,11 @@ window.onload = function() {
   function startGame() {
   	startScreen.visible = false;
   	player.visible = true;
+    arrow.visible = true;
   }
   
   function endGame() {
+    arrow.visible = false;
     player.kill();
     endScreen.visible = true;
   }
