@@ -5,15 +5,17 @@ window.onload = function() {
   var keys;
 
   function preload () {
-    loadImages();
-    game.load.image('player', 'img/Phero.png');
-    keys = game.input.keyboard.createCursorKeys();
+    loadImages(function() {
+      game.load.image('player', 'img/Phero.png');
+      keys = game.input.keyboard.createCursorKeys();
+    });
   }
 
   function create () {
-    createImages();
-    player = game.add.sprite(5, 5, 'player');
-    player.bringToTop();
+    createImages(function() {
+      player = game.add.sprite(5, 5, 'player');
+      player.bringToTop();
+    });
   }
 
   function update() {
@@ -32,15 +34,16 @@ window.onload = function() {
     }
   }
 
-  function loadImages() {
+  function loadImages(callback) {
     $.getJSON('data/tiles.json', function(data) {
       $.each(data, function(key, value) {
         game.load.image(key, value);
       });
     });
+    callback();
   }
 
-  function createImages() {
+  function createImages(callback) {
     $.getJSON('data/tiles.json', function(data) {
       var x = 0;
       var y = 0;
@@ -53,5 +56,6 @@ window.onload = function() {
         }
       });
     });
+    callback();
   }
 };
