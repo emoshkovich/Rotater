@@ -58,8 +58,8 @@ window.onload = function() {
   function update() {
   	var d = new Date();
   	
-  	var x = Math.floor((player.x+70)/100);
-  	var y = Math.floor((player.y+70)/100);
+  	var x = Math.floor((player.x)/100);
+  	var y = Math.floor((player.y)/100);
   	if (x === 5 && y === 4){
   	  endGame();
   	  
