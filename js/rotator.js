@@ -31,7 +31,7 @@ window.onload = function() {
       startScreen = game.add.tileSprite(0, 0, 600, 600, 'startScreen');
       endScreen = game.add.tileSprite(0, 0, 600, 600, 'endScreen');
       endScreen.visible = false;
-      player = game.add.sprite(70, 70, 'henrywalk');
+      player = game.add.sprite(50, 50, 'henrywalk');
       player.anchor.setTo(.5, .5);
       player.body.setSize(100, 100, 0, 0);
       player.animations.add('walk');
@@ -60,7 +60,7 @@ window.onload = function() {
   	
   	var x = Math.floor((player.x)/100);
   	var y = Math.floor((player.y)/100);
-  	if (x === 5 && y === 4){
+  	if (x === 5 && y === 5){
   	  endGame();
   	  
   	  game.input.onDown.add(restartGame, this);
