@@ -113,8 +113,8 @@ window.onload = function() {
     callback();
   }
   function rotate(x, y){
-  	x = Math.floor((x+50)/100);
-  	y = Math.floor((y+50)/100);
+  	x = Math.floor((x)/100);
+  	y = Math.floor((y)/100);
 	console.log(x +" " + y);
 	if (x > 0 && x < 5 && y > 0 && y < 5){
 		tiles[x-1][y-1].img.angle += 90;
@@ -218,9 +218,5 @@ window.onload = function() {
    }
 	function render(sprite) {
 	    game.debug.renderSpriteInfo(sprite, 32, 32);
-	    game.debug.renderText('angularVelocity: ' + sprite.body.angularVelocity, 32, 200);
-	    game.debug.renderText('angularAcceleration: ' + sprite.body.angularAcceleration, 32, 232);
-	    game.debug.renderText('angularDrag: ' + sprite.body.angularDrag, 32, 264);
-	    game.debug.renderText('deltaZ: ' + sprite.body.deltaZ(), 32, 296);
 	}
 }
