@@ -112,7 +112,7 @@ window.onload = function() {
     var i =0;
     var j=0;
     $.each(json, function(key, value) {
-      var temp = game.add.sprite(x+70, y+70, key);
+      var temp = game.add.sprite(x+50, y+50, key);
       temp.anchor.setTo(0.5,0.5);
       var obj;
       if(value.indexOf("1") !== -1){
